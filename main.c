@@ -3,33 +3,51 @@
 
 void GPIOB_LED_Init(void);
 void SetSysClockTo72(void);
+void GPIOA_But_Init(void);
+void LED_switch(int);
 
 
 int main()
 {
   SetSysClockTo72();
   GPIOB_LED_Init();
+  GPIOA_But_Init();
+  int But_state = 0;
   while(1)
   {
-    // --- Reset bit PB2 ---
-    GPIOB -> BSRR = GPIO_BSRR_BR2;
-    for (int i = 0; i < 100000; i++){
-    }
-    // --- Set bit PB2 ---
-    GPIOB -> BSRR = GPIO_BSRR_BS2;
-    for (int i = 0; i < 100000; i++){
-    }
+    But_state = !READ_BIT(GPIOA -> IDR, GPIO_IDR_IDR0);
+    LED_switch(But_state);
   }
 }
 
+void LED_switch (int but_state)
+{
+  if (but_state)
+  {
+    GPIOB -> BSRR = GPIO_BSRR_BR2;
+  }else
+  {
+    GPIOB -> BSRR = GPIO_BSRR_BS2;
+  }
+}
+// --- Init LED pin ---
 void GPIOB_LED_Init(void)
 {
-  // --- Port B CLocking ---
   RCC -> APB2ENR |= RCC_APB2ENR_IOPBEN;
-  // --- CLear Bits of pin 2 ---
+  // --- CLear Bits of PB2 ---
   GPIOB -> CRL &= ~(GPIO_CRL_CNF2 | GPIO_CRL_MODE2);
   // --- Set conf MODE2 = 10, CNF2 = 00 ---
   GPIOB -> CRL |= GPIO_CRL_MODE2_1;
+}
+
+// --- Init button pin ---
+void GPIOA_But_Init(void)
+{
+  RCC -> APB2ENR |= RCC_APB2ENR_IOPAEN;
+  // --- Clear bits of PA0 ---
+  GPIOA -> CRL &= ~(GPIO_CRL_MODE0 | GPIO_CRL_CNF0);
+  // --- Set conf MODE0 = 00, CNF0 = 10 ---
+  GPIOA -> CRL |= GPIO_CRL_CNF0_1;
 }
 
 void SetSysClockTo72(void)
