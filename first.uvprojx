@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath></IncludePath>
+              <IncludePath>.\HW_Init\Inc;.\HW_Init\Src</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -388,6 +388,31 @@
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\main.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>HW_Init</GroupName>
+          <Files>
+            <File>
+              <FileName>hw_gpio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HW_Init\Src\hw_gpio.c</FilePath>
+            </File>
+            <File>
+              <FileName>hw_gpio.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HW_Init\Inc\hw_gpio.h</FilePath>
+            </File>
+            <File>
+              <FileName>hw_IT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\HW_Init\Src\hw_IT.c</FilePath>
+            </File>
+            <File>
+              <FileName>hw_IT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\HW_Init\Inc\hw_IT.h</FilePath>
             </File>
           </Files>
         </Group>

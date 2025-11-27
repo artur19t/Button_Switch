@@ -1,0 +1,12 @@
+#include "hw_IT.h"
+
+void IT_EXTI_PAO_Init(void)
+{
+  RCC ->APB2ENR |= RCC_APB2ENR_AFIOEN;
+  EXTI ->PR |= EXTI_PR_PR0;
+  EXTI ->IMR |= EXTI_IMR_MR0;
+  AFIO ->EXTICR[0] &= ~AFIO_EXTICR1_EXTI0;
+  EXTI ->FTSR |= EXTI_FTSR_TR0;
+  NVIC_EnableIRQ(EXTI0_IRQn);
+  NVIC_SetPriority(EXTI0_IRQn, 0);
+}
