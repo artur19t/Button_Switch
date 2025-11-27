@@ -6,7 +6,7 @@ void IT_EXTI_PAO_Init(void)
   EXTI ->PR |= EXTI_PR_PR0;
   EXTI ->IMR |= EXTI_IMR_MR0;
   AFIO ->EXTICR[0] &= ~AFIO_EXTICR1_EXTI0;
-  EXTI ->FTSR |= EXTI_FTSR_TR0;
+  EXTI ->RTSR |= EXTI_FTSR_TR0;
   NVIC_EnableIRQ(EXTI0_IRQn);
   NVIC_SetPriority(EXTI0_IRQn, 0);
 }

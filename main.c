@@ -1,10 +1,9 @@
 #include "stm32f10x.h"                  // Device header
 #include "hw_gpio.h"
 #include "hw_IT.h"
+#include "button.h"
 
 void SetSysClockTo72(void);
-void LED_switch(int);
-
 
 int main()
 {
@@ -12,35 +11,21 @@ int main()
   GPIOB_LED_Init();
   GPIOA_But_Init();
   IT_EXTI_PAO_Init();
+  
+  // --- SysTick 1 ms ---
+  SysTick->LOAD = 72000 - 1; 
+  SysTick->VAL = 0;
+  SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk |
+                  SysTick_CTRL_ENABLE_Msk   |
+                  SysTick_CTRL_TICKINT_Msk;
   while(1)
   {
   }
 }
 
-void EXTI0_IRQHandler (void)
+void SysTick_Handler(void)
 {
-  if (EXTI->PR & EXTI_PR_PR0)
-  {
-    EXTI->PR |= EXTI_PR_PR0;
-    if (GPIOB->ODR & GPIO_ODR_ODR2)
-    {
-      GPIOB -> BSRR = GPIO_BSRR_BR2;
-    }else
-    {
-      GPIOB -> BSRR = GPIO_BSRR_BS2;
-    }
-  }
-}
-
-void LED_switch (int but_state)
-{
-  if (but_state)
-  {
-    GPIOB -> BSRR = GPIO_BSRR_BR2;
-  }else
-  {
-    GPIOB -> BSRR = GPIO_BSRR_BS2;
-  }
+    Button_Process();
 }
 
 void SetSysClockTo72(void)
