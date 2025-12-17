@@ -9,9 +9,10 @@ void GPIO_USART_UsrInit (void)
   GPIOA->CRH |= GPIO_CRH_CNF9_1;
   GPIOA->CRH |= GPIO_CRH_MODE9;
   // --- USART1_RX, PA10 ---
+  GPIOA->CRH &= ~GPIO_CRH_MODE10;
   GPIOA->CRH &= ~GPIO_CRH_CNF10;
-  GPIOA->CRH |= GPIO_CRH_CNF10_1;
-  GPIOA->CRH |= GPIO_CRH_MODE10;
+  GPIOA->CRH |=  GPIO_CRH_CNF10_1;
+  GPIOA->ODR |=  GPIO_ODR_ODR10;
 }
 
 // --- GPIO LED PB2 ---
@@ -29,8 +30,10 @@ void USART1_UsrInit (void)
 {
   RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
   USART1->BRR = (39 << 4) | 1;//115200
-  USART1->CR1 |= USART_CR1_UE | USART_CR1_TE | USART_CR1_RE;
+  USART1->CR1 |=  USART_CR1_TE | USART_CR1_RE;
   USART1->CR3 |= USART_CR3_DMAR | USART_CR3_DMAT;
+  USART1->CR1 |= USART_CR1_IDLEIE;
+  USART1->CR1 |= USART_CR1_UE;
 }
 
 // --- DMA Init ---
@@ -49,7 +52,7 @@ void DMA1_UsrInit (void)
 }
 
 // --- DMA User Config ---
-void DMA1_UsrConfig(volatile uint32_t *srcAddr, uint8_t *destAddr, uint16_t dSize)
+void DMA1_UsrConfig(volatile uint16_t *srcAddr, uint8_t *destAddr, uint16_t dSize)
 {
   DMA1_Channel5->CCR &= ~DMA_CCR1_EN;
   DMA1_Channel5->CNDTR = dSize;

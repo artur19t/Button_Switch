@@ -17,23 +17,29 @@ Library Manager: ArmAr.exe V6.24
 Hex Converter:   FromElf.exe V6.24
 CPU DLL:         SARMCM3.DLL V5.43.0.0
 Dialog DLL:      DCM.DLL V1.17.5.0
-Target DLL:      UL2CM3.DLL V1.164.16.0
+Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.3.1.0
 Dialog DLL:      TCM.DLL V1.56.6.0
  
 <h2>Project:</h2>
 C:\Users\trety\Desktop\IoT\Projects\Book\First_CMSIS\STMF103_UART_DMA\Usart_dma.uvprojx
-Project File Date:  12/16/2025
+Project File Date:  12/17/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.24', folder: 'C:\Program Files\Keil_v5\ARM\ARMCLANG\Bin'
 Rebuild target 'F103C8T6'
-compiling main.c...
 compiling system_stm32f10x.c...
+it.c(9): warning: variable 'tmp' set but not used [-Wunused-but-set-variable]
+    9 |     volatile uint32_t tmp;
+      |                       ^
+1 warning generated.
+compiling it.c...
+compiling main.c...
 compiling hw_init.c...
 assembling startup_stm32f10x_ld.s...
+compiling usart_logic.c...
 linking...
-Program Size: Code=1076 RO-data=252 RW-data=0 ZI-data=1632  
-".\Objects\Usart_dma.axf" - 0 Error(s), 0 Warning(s).
+Program Size: Code=1948 RO-data=304 RW-data=0 ZI-data=1672  
+".\Objects\Usart_dma.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -60,10 +66,10 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE@6.1.1
 
    * Component: Keil::Device:Startup@1.0.0
-      Source file:   Device/Source/system_stm32f10x.c
-      Include file:  RTE_Driver/Config/RTE_Device.h
       Source file:   Device/Source/ARM/STM32F1xx_OPT.s
       Source file:   Device/Source/ARM/startup_stm32f10x_ld.s
+      Source file:   Device/Source/system_stm32f10x.c
+      Include file:  RTE_Driver/Config/RTE_Device.h
 Build Time Elapsed:  00:00:00
 </pre>
 </body>
