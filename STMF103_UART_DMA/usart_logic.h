@@ -3,8 +3,8 @@
 
 #include "main.h"
 extern uint8_t MainBuf[];
-void USART_UsrLogic(uint8_t *bufAddr, uint16_t dSize);
-void prepare(uint8_t *bufAddr, uint16_t dSize);
+void collect_data(uint8_t *bufAddr, uint16_t dSize, bool);
+void prepare(uint8_t *bufAddr, uint16_t dSize, bool need_s);
 void process_command(void);
 void USART_UstTranslate(uint8_t *tx_buf, uint16_t dSize);
 

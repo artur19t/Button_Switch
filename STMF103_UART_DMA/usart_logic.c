@@ -2,6 +2,7 @@
 
 enum comand {LED_ON, LED_OFF, RETRANSLATE};
 static char cmd_buf[RX_SIZE];
+uint8_t len = 0;
 
 typedef struct {
   const char *cmd;
@@ -14,15 +15,18 @@ const usart_cmd_entry_t usart_commands[] = {
   [RETRANSLATE]  = { "retranslate",  cmd_retranslate }
 };
 
-void USART_UsrLogic(uint8_t *bufAddr, uint16_t dSize)
+void collect_data(uint8_t *bufAddr, uint16_t dSize, bool need_s)
 {
-  prepare(bufAddr, dSize);
-  process_command();
+  prepare(bufAddr, dSize, need_s);
+  if (!need_s)
+  {
+    process_command();
+    len = 0;
+  }
 }
 
-void prepare(uint8_t *bufAddr, uint16_t dSize)
+void prepare(uint8_t *bufAddr, uint16_t dSize, bool need_s)
 {
-  uint8_t len = 0;
   for(uint16_t i = 0; i < dSize; i++)
   {
     char c = bufAddr[i];
@@ -33,7 +37,10 @@ void prepare(uint8_t *bufAddr, uint16_t dSize)
     cmd_buf[len] = c;
     len++;
   }
-  cmd_buf[len] = '\0';
+  if (!need_s)
+  {
+    cmd_buf[len] = '\0';
+  }
 }
 
 void process_command(void)

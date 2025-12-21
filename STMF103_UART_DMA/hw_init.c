@@ -43,7 +43,7 @@ void DMA1_UsrInit (void)
   // --- DMA RX UART1 ---
   DMA1_Channel5->CCR &= ~(DMA_CCR5_TEIE | DMA_CCR5_TCIE | DMA_CCR5_HTIE);
   DMA1_Channel5->CCR &= ~DMA_CCR5_DIR;
-  DMA1_Channel5->CCR &= ~DMA_CCR5_CIRC;
+  DMA1_Channel5->CCR |= DMA_CCR5_CIRC;
   DMA1_Channel5->CCR &= ~DMA_CCR5_PINC;
   DMA1_Channel5->CCR |= DMA_CCR5_MINC;
   DMA1_Channel5->CCR &= ~DMA_CCR5_MSIZE;

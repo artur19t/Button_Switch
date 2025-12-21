@@ -3,6 +3,8 @@
 #include "stm32f10x.h"                  // Device header
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
+
 
 #define RX_SIZE 20
 

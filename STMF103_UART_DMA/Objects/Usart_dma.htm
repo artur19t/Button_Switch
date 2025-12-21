@@ -3,11 +3,11 @@
 <title>Static Call Graph - [.\Objects\Usart_dma.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\Usart_dma.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Thu Dec 18 11:32:35 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Sun Dec 21 17:48:11 2025
 <BR><P>
 <H3>Maximum Stack Usage =         72 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-USART1_IRQHandler &rArr; USART_UsrLogic &rArr; process_command &rArr; USART_UstTranslate &rArr; DMA1_USART1TX_UsrConfig
+USART1_IRQHandler &rArr; collect_data &rArr; process_command &rArr; USART_UstTranslate &rArr; DMA1_USART1TX_UsrConfig
 <P>
 <H3>
 Functions with no stack information
@@ -409,7 +409,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[54]"></a>strcmp</STRONG> (Thumb, 128 bytes, Stack size 0 bytes, strcmpv7m.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_command
+<BR><BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_command
 </UL>
 
 <P><STRONG><a name="[7a]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
@@ -461,10 +461,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[4c]"></a>DMA1_USART1TX_UsrConfig</STRONG> (Thumb, 72 bytes, Stack size 8 bytes, hw_init.o(.text.DMA1_USART1TX_UsrConfig))
+<P><STRONG><a name="[4a]"></a>DMA1_USART1TX_UsrConfig</STRONG> (Thumb, 72 bytes, Stack size 8 bytes, hw_init.o(.text.DMA1_USART1TX_UsrConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = DMA1_USART1TX_UsrConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_UstTranslate
+<BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_UstTranslate
 </UL>
 
 <P><STRONG><a name="[50]"></a>DMA1_UsrInit</STRONG> (Thumb, 166 bytes, Stack size 0 bytes, hw_init.o(.text.DMA1_UsrInit))
@@ -486,10 +486,10 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_ld.o(.text)
 </UL>
-<P><STRONG><a name="[2b]"></a>USART1_IRQHandler</STRONG> (Thumb, 110 bytes, Stack size 16 bytes, it.o(.text.USART1_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = USART1_IRQHandler &rArr; USART_UsrLogic &rArr; process_command &rArr; USART_UstTranslate &rArr; DMA1_USART1TX_UsrConfig
+<P><STRONG><a name="[2b]"></a>USART1_IRQHandler</STRONG> (Thumb, 182 bytes, Stack size 16 bytes, it.o(.text.USART1_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = USART1_IRQHandler &rArr; collect_data &rArr; process_command &rArr; USART_UstTranslate &rArr; DMA1_USART1TX_UsrConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_UsrLogic
+<BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;collect_data
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f10x_ld.o(RESET)
 </UL>
@@ -497,21 +497,12 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[48]"></a>USART_UsrLogic</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, usart_logic.o(.text.USART_UsrLogic))
-<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = USART_UsrLogic &rArr; process_command &rArr; USART_UstTranslate &rArr; DMA1_USART1TX_UsrConfig
-</UL>
-<BR>[Calls]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_command
-<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prepare
-</UL>
-<BR>[Called By]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_IRQHandler
-</UL>
-
-<P><STRONG><a name="[4b]"></a>USART_UstTranslate</STRONG> (Thumb, 24 bytes, Stack size 16 bytes, usart_logic.o(.text.USART_UstTranslate))
+<P><STRONG><a name="[49]"></a>USART_UstTranslate</STRONG> (Thumb, 24 bytes, Stack size 16 bytes, usart_logic.o(.text.USART_UstTranslate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = USART_UstTranslate &rArr; DMA1_USART1TX_UsrConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_USART1TX_UsrConfig
+<BR>[Calls]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA1_USART1TX_UsrConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_command
+<BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_command
 </UL>
 
 <P><STRONG><a name="[33]"></a>cmd_led_off</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, usart_logic.o(.text.cmd_led_off))
@@ -523,6 +514,15 @@ Global Symbols
 <P><STRONG><a name="[34]"></a>cmd_retranslate</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, usart_logic.o(.text.cmd_retranslate))
 <BR>[Address Reference Count : 1]<UL><LI> usart_logic.o(.rodata.usart_commands)
 </UL>
+<P><STRONG><a name="[48]"></a>collect_data</STRONG> (Thumb, 64 bytes, Stack size 16 bytes, usart_logic.o(.text.collect_data))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = collect_data &rArr; process_command &rArr; USART_UstTranslate &rArr; DMA1_USART1TX_UsrConfig
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;process_command
+<LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prepare
+</UL>
+<BR>[Called By]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_IRQHandler
+</UL>
+
 <P><STRONG><a name="[3e]"></a>main</STRONG> (Thumb, 68 bytes, Stack size 24 bytes, main.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = main &rArr; DMA1RX_UsrConfig
 </UL>
@@ -537,19 +537,19 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[49]"></a>prepare</STRONG> (Thumb, 130 bytes, Stack size 12 bytes, usart_logic.o(.text.prepare))
+<P><STRONG><a name="[4b]"></a>prepare</STRONG> (Thumb, 150 bytes, Stack size 12 bytes, usart_logic.o(.text.prepare))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = prepare
 </UL>
-<BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_UsrLogic
+<BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;collect_data
 </UL>
 
-<P><STRONG><a name="[4a]"></a>process_command</STRONG> (Thumb, 120 bytes, Stack size 16 bytes, usart_logic.o(.text.process_command))
+<P><STRONG><a name="[4c]"></a>process_command</STRONG> (Thumb, 120 bytes, Stack size 16 bytes, usart_logic.o(.text.process_command))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = process_command &rArr; USART_UstTranslate &rArr; DMA1_USART1TX_UsrConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcmp
-<LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_UstTranslate
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_UstTranslate
 </UL>
-<BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_UsrLogic
+<BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;collect_data
 </UL>
 <P>
 <H3>

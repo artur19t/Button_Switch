@@ -1,6 +1,6 @@
 #include "it.h"
 
-uint8_t index_buf = 0;
+uint16_t old_pos = 0;
 
 void USART1_IRQHandler(void)
 {
@@ -9,10 +9,14 @@ void USART1_IRQHandler(void)
     (void)USART1->SR;
     (void)USART1->DR;
     uint16_t received = RX_SIZE - DMA1_Channel5->CNDTR;
-    USART_UsrLogic(RxBuf, received);
-    
-    DMA1_Channel5->CCR &= ~DMA_CCR1_EN;
-    DMA1_Channel5->CNDTR = RX_SIZE;
-    DMA1_Channel5->CCR |= DMA_CCR1_EN;
+    if (old_pos > received)
+    {
+      collect_data(&RxBuf[old_pos], received-old_pos, false);
+    }else
+    {
+      collect_data(&RxBuf[old_pos], RX_SIZE-old_pos, true);
+      collect_data(&RxBuf[0], received, false);
+    }
+    old_pos = received;
   }
 }
